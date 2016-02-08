@@ -1,6 +1,6 @@
 db-data:
   image: debian
-  
+
 db:
   image: mysql
   volumes_from:
@@ -12,5 +12,16 @@ blog:
   image: wordpress
   links:
     - db:mysql
+
+wiki:
+  image: synctree/mediawiki
+  links:
+    - db:mysql
+
+proxy:
+  image: nginx
+  links:
+    - blog:blog
+    - wiki:wiki
   ports:
     - 80:80
