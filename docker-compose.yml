@@ -19,7 +19,7 @@ wiki:
     - db:mysql
 
 proxy:
-  image: nginx
+  image: uspgamedev/nginx
   links:
     - blog:blog
     - wiki:wiki
