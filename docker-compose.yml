@@ -14,6 +14,8 @@ services:
     volumes:
       - /var/www/data/wordpress/wp-content:/var/www/wp-content
     environment:
+      WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_PASSWORD: alfafa
       WORDPRESS_DB_NAME: uspgamedev_wordpress
 
   wiki:
@@ -24,6 +26,8 @@ services:
     volumes:
       - /var/www/data/mediawiki:/var/www-shared/html
     environment:
+      MEDIAWIKI_DB_HOST: mysql:3306
+      MEDIAWIKI_DB_PASSWORD: alfafa
       MEDIAWIKI_DB_NAME: uspgamedev_wiki
 
   proxy:
