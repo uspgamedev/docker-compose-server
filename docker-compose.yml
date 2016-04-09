@@ -3,19 +3,17 @@ services:
   db:
     image: mysql
     volumes:
-      - /var/www/data/mysql:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: alfafa
+      - /var/docker-www/data/mysql:/var/lib/mysql
 
   blog:
     image: uspgamedev/wordpress
     links:
       - db:mysql
     volumes:
-      - /var/www/data/wordpress/wp-content:/var/www/wp-content
+      - /var/docker-www/config:/host
+      - /var/docker-www/data/wordpress/wp-content:/var/www/wp-content
     environment:
       WORDPRESS_DB_HOST: mysql:3306
-      WORDPRESS_DB_PASSWORD: alfafa
       WORDPRESS_DB_NAME: uspgamedev_wordpress
 
   wiki:
@@ -24,10 +22,10 @@ services:
       - db:mysql
     working_dir: /var/www/html/mediawiki
     volumes:
-      - /var/www/data/mediawiki:/var/www-shared/html
+      - /var/docekr-www/config:/host
+      - /var/docker-www/data/mediawiki:/var/www-shared/html
     environment:
       MEDIAWIKI_DB_HOST: mysql:3306
-      MEDIAWIKI_DB_PASSWORD: alfafa
       MEDIAWIKI_DB_NAME: uspgamedev_wiki
 
   proxy:
@@ -36,7 +34,8 @@ services:
       - blog:blog
       - wiki:wiki
     volumes:
-      - /var/discourse/shared/standalone/nginx.http.sock:/var/discourse/shared/standalone/nginx.http.sock
+      - /var/docker-www/discourse/shared/standalone/nginx.http.sock:/var/discourse/shared/standalone/nginx.http.sock
+      - /var/docker-www/static:/usr/share/nginx/html:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
     ports:
       - 80:80
