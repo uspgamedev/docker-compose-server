@@ -1,31 +1,33 @@
-db-data:
-  image: debian
+version: '2'
+services:
+  db-data:
+    image: debian
 
-db:
-  image: mysql
-  volumes_from:
-    - db-data
-  environment:
-    MYSQL_ROOT_PASSWORD: alfafa
+  db:
+    image: mysql
+    volumes_from:
+      - db-data
+    environment:
+      MYSQL_ROOT_PASSWORD: alfafa
 
-blog:
-  image: wordpress
-  links:
-    - db:mysql
+  blog:
+    image: wordpress
+    links:
+      - db:mysql
 
-wiki:
-  image: synctree/mediawiki
-  links:
-    - db:mysql
+  wiki:
+    image: synctree/mediawiki
+    links:
+      - db:mysql
 
-proxy:
-  image: uspgamedev/nginx
-  links:
-    - blog:blog
-    - wiki:wiki
-  volumes:
-    - "/var/discourse/shared/standalone/nginx.http.sock":"/var/discourse/shared/standalone/nginx.http.sock"
-    - /etc/letsencrypt:/etc/letsencrypt:ro
-  ports:
-    - 80:80
-    - 443:443
+  proxy:
+    image: uspgamedev/nginx
+    links:
+      - blog:blog
+      - wiki:wiki
+    volumes:
+      - "/var/discourse/shared/standalone/nginx.http.sock":"/var/discourse/shared/standalone/nginx.http.sock"
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    ports:
+      - 80:80
+      - 443:443
