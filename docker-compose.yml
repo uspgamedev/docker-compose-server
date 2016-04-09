@@ -1,12 +1,9 @@
 version: '2'
 services:
-  db-data:
-    image: debian
-
   db:
     image: mysql
-    volumes_from:
-      - db-data
+    volumes:
+      - /var/www/data/mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: alfafa
 
