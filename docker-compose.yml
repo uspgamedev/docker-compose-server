@@ -19,6 +19,11 @@ services:
     image: synctree/mediawiki
     links:
       - db:mysql
+    working_dir: /var/www/html/mediawiki
+    volumes:
+      - /var/www/data/mediawiki:/var/www-shared/html
+    environment:
+      MEDIAWIKI_DB_NAME: uspgamedev_wiki
 
   proxy:
     image: uspgamedev/nginx
