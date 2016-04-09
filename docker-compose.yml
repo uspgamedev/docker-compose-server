@@ -22,7 +22,7 @@ services:
       - db:mysql
     working_dir: /var/www/html/mediawiki
     volumes:
-      - /var/docekr-www/config:/host
+      - /var/docker-www/config:/host
       - /var/docker-www/data/mediawiki:/var/www-shared/html
     environment:
       MEDIAWIKI_DB_HOST: mysql:3306
@@ -34,7 +34,7 @@ services:
       - blog:blog
       - wiki:wiki
     volumes:
-      - /var/docker-www/discourse/shared/standalone/nginx.http.sock:/var/discourse/shared/standalone/nginx.http.sock
+      - /var/docker-www/data/discourse/standalone/nginx.http.sock:/var/discourse/nginx.http.sock
       - /var/docker-www/static:/usr/share/nginx/html:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
     ports:
