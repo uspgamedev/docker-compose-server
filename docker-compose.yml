@@ -23,5 +23,9 @@ proxy:
   links:
     - blog:blog
     - wiki:wiki
+  volumes:
+    - "/var/discourse/shared/standalone/nginx.http.sock":"/var/discourse/shared/standalone/nginx.http.sock"
+    - /etc/letsencrypt:/etc/letsencrypt:ro
   ports:
     - 80:80
+    - 443:443
