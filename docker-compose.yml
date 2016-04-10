@@ -34,8 +34,8 @@ services:
       - blog:blog
       - wiki:wiki
     volumes:
-      - /var/docker-www/data/discourse/standalone/nginx.http.sock:/var/discourse/nginx.http.sock
-      - /var/docker-www/static:/usr/share/nginx/html:ro
+      - /var/docker-www/data/discourse/standalone:/var/discourse
+      - /var/docker-www/static:/var/www/static:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
     ports:
       - 80:80
