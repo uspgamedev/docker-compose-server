@@ -12,6 +12,7 @@ services:
     volumes:
       - /var/docker-www/config:/host
       - /var/docker-www/data/wordpress/wp-content:/var/www/wp-content
+      - /etc/ssmtp:/etc/ssmtp:ro
     environment:
       WORDPRESS_DB_HOST: mysql:3306
       WORDPRESS_DB_NAME: uspgamedev_wordpress
@@ -24,6 +25,7 @@ services:
     volumes:
       - /var/docker-www/config:/host
       - /var/docker-www/data/mediawiki:/var/www-shared/html
+      - /etc/ssmtp:/etc/ssmtp:ro
     environment:
       MEDIAWIKI_DB_HOST: mysql:3306
       MEDIAWIKI_DB_NAME: uspgamedev_wiki
