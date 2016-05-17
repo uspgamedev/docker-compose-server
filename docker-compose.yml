@@ -2,11 +2,13 @@ version: '2'
 services:
   db:
     image: mysql
+    restart: always
     volumes:
       - /var/docker-www/data/mysql:/var/lib/mysql
 
   blog:
     image: uspgamedev/wordpress
+    restart: always
     links:
       - db:mysql
     volumes:
@@ -19,6 +21,7 @@ services:
 
   wiki:
     image: uspgamedev/mediawiki
+    restart: always
     links:
       - db:mysql
     working_dir: /var/www/html/mediawiki
@@ -32,6 +35,7 @@ services:
 
   proxy:
     image: uspgamedev/nginx
+    restart: always
     links:
       - blog:blog
       - wiki:wiki
