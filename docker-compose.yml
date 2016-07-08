@@ -43,6 +43,7 @@ services:
       - /var/docker-www/data/discourse/standalone:/var/discourse
       - /var/docker-www/static:/var/www/static:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /var/docker-www/acme-challenge:/var/acme-challenge:ro
     ports:
       - 80:80
       - 443:443
