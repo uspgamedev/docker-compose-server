@@ -38,6 +38,7 @@ services:
     restart: always
     volumes:
       - /var/docker-www/config:/host:ro
+      - /var/docker-www/data/mattermost:/mattermost/config
     environment:
       DB_HOST: uspgamedev.org
 
