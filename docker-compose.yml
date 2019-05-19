@@ -57,6 +57,23 @@ services:
       - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
       - '--no-collector.ipvs'
 
+  grafana:
+    image: grafana/grafana:6.1.6
+    # links:
+    #   - db:mysql
+
+    volumes:
+      - /var/docker-www/data/grafana:/var/lib/grafana
+
+    ports:
+      - 3000:3000
+
+    environment:
+      GF_USERS_ALLOW_SIGN_UP: false
+      # GF_DATABASE_TYPE: mysql
+      # GF_DATABASE_HOST: mysql:3306
+      # GF_DATABASE_USER: root
+
   proxy:
     image: uspgamedev/nginx
     restart: always
