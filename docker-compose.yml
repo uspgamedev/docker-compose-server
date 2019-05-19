@@ -64,10 +64,7 @@ services:
 
     volumes:
       - /var/docker-www/data/grafana:/var/lib/grafana
-
-    ports:
-      - 3000:3000
-
+      
     environment:
       GF_USERS_ALLOW_SIGN_UP: "false"
       # GF_DATABASE_TYPE: mysql
@@ -82,6 +79,7 @@ services:
       - wiki:wikia
       - chat:chat
       - node-exporter:node-exporter
+      - grafana:grafana
     volumes:
       - /var/docker-www/data/discourse/standalone:/var/discourse
       - /var/docker-www/static:/var/www/static:ro
