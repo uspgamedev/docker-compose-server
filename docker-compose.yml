@@ -69,7 +69,7 @@ services:
       - 3000:3000
 
     environment:
-      GF_USERS_ALLOW_SIGN_UP: false
+      GF_USERS_ALLOW_SIGN_UP: "false"
       # GF_DATABASE_TYPE: mysql
       # GF_DATABASE_HOST: mysql:3306
       # GF_DATABASE_USER: root
