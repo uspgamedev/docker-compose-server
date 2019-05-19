@@ -64,9 +64,10 @@ services:
 
     volumes:
       - /var/docker-www/data/grafana:/var/lib/grafana
-      
+
     environment:
       GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_SERVER_DOMAIN: "grafana.uspgamedev.org"
       # GF_DATABASE_TYPE: mysql
       # GF_DATABASE_HOST: mysql:3306
       # GF_DATABASE_USER: root
