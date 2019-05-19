@@ -43,6 +43,20 @@ services:
     environment:
       DB_HOST: uspgamedev.org
 
+  node-exporter:
+    image: prom/node-exporter:v0.18.0
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+      - /etc/hostname:/etc/nodename
+    command:
+      - '--path.sysfs=/host/sys'
+      - '--path.procfs=/host/proc'
+      - '--collector.textfile.directory=/etc/node-exporter/'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+      - '--no-collector.ipvs'
+
   proxy:
     image: uspgamedev/nginx
     restart: always
@@ -50,6 +64,7 @@ services:
       - blog:blog
       - wiki:wikia
       - chat:chat
+      - node-exporter:node-exporter
     volumes:
       - /var/docker-www/data/discourse/standalone:/var/discourse
       - /var/docker-www/static:/var/www/static:ro
