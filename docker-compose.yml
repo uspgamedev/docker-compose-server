@@ -59,6 +59,7 @@ services:
 
   grafana:
     image: grafana/grafana:6.1.6
+    restart: always
     # links:
     #   - db:mysql
 
