@@ -33,16 +33,6 @@ services:
       MEDIAWIKI_DB_HOST: mysql:3306
       MEDIAWIKI_DB_NAME: uspgamedev_wiki
 
-  chat:
-    image: uspgamedev/mattermost
-    restart: always
-    volumes:
-      - /var/docker-www/config:/host:ro
-      - /var/docker-www/data/mattermost:/mattermost/data
-      - /var/docker-www/config/mattermost:/mattermost/config
-    environment:
-      DB_HOST: uspgamedev.org
-
   node-exporter:
     image: prom/node-exporter:v0.18.0
     restart: always
@@ -57,31 +47,13 @@ services:
       - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
       - '--no-collector.ipvs'
 
-  grafana:
-    image: grafana/grafana:6.1.6
-    restart: always
-    # links:
-    #   - db:mysql
-
-    volumes:
-      - /var/docker-www/data/grafana:/var/lib/grafana
-
-    environment:
-      GF_USERS_ALLOW_SIGN_UP: "false"
-      GF_SERVER_DOMAIN: "grafana.uspgamedev.org"
-      # GF_DATABASE_TYPE: mysql
-      # GF_DATABASE_HOST: mysql:3306
-      # GF_DATABASE_USER: root
-
   proxy:
     image: uspgamedev/nginx
     restart: always
     links:
       - blog:blog
       - wiki:wikia
-      - chat:chat
       - node-exporter:node-exporter
-      - grafana:grafana
     volumes:
       - /var/docker-www/data/discourse/standalone:/var/discourse
       - /var/docker-www/static:/var/www/static:ro
