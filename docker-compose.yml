@@ -20,14 +20,15 @@ services:
       WORDPRESS_DB_NAME: uspgamedev_wordpress
 
   wiki:
-    image: uspgamedev/mediawiki
+    image: mediawiki:1.37
     restart: always
     links:
       - db:mysql
-    working_dir: /var/www/html/mediawiki
     volumes:
       - /var/docker-www/config:/host
-      - /var/docker-www/data/mediawiki:/var/www-shared/html
+      #- /var/docker-www/data/mediawiki:/var/www-shared/html
+      - /var/docker-www/data/mediawiki/LocalSettings.php:/var/www/html/LocalSettings.php
+      - /var/docker-www/data/mediawiki/images:/var/www/html/images
       - /etc/ssmtp:/etc/ssmtp:ro
     environment:
       MEDIAWIKI_DB_HOST: mysql:3306
