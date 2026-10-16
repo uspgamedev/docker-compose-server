@@ -7,10 +7,6 @@ docker run --rm --name certbot \
     certbot/certbot:latest \
         certonly \
         --webroot --webroot-path /var/docker-www/acme-challenge \
-        -d uspgamedev.org \
-        -d www.uspgamedev.org \
-        -d git.uspgamedev.org \
-        -d forum.uspgamedev.org \
-        -d blog.uspgamedev.org \
-        -d chat.uspgamedev.org \
+        -d usp.game.dev.br \
+        -d forum.usp.game.dev.br \
         --expand
